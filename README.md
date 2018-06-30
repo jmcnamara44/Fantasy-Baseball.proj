@@ -4,6 +4,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
+### Completed Soecs
+
+
+
+### Planned Specs
+
+_When you do a draft the function will assign those drafted players to teams already existing in the database._
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding

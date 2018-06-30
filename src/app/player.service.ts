@@ -15,11 +15,10 @@ export class PlayerService {
     console.log("player service" + this.players);
     return this.players;
   }
-  playerList = [ /*83 players */
+  playerList = [ /*87 players */
     "Schwarber",
     "Rizzo",
     "Abreu",
-    "Nolan",
     "Ichiro",
     "Manny",
     "Mookie",

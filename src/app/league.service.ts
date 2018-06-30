@@ -13,7 +13,6 @@ export class LeagueService {
     return this.leagues;
   }
 
-
   getLeagueById(leagueId: string) {
     return this.database.object('leagues/' + leagueId);
   }
