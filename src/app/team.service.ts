@@ -7,10 +7,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class TeamService {
   teams: FirebaseListObservable<any[]> = null;
   userId: string = "";
+
   constructor(private database: AngularFireDatabase, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
       if(user) {
-        // console.log(this);
         this.userId = user.uid;
         this.teams = database.list(`teams/${this.userId}`);
         // console.log(this.userId);
@@ -25,7 +25,7 @@ export class TeamService {
     this.teams.push(newTeam);
   }
 
-  getTeams(): FirebaseListObservable<Team[]> {
+  getTeams() {
     if(!this.userId) return;
     this.teams = this.database.list(`teams/${this.userId}`);
     return this.teams;
@@ -44,5 +44,5 @@ export class TeamService {
     let teamEntryInFirebase = this.getTeamById(localTeamToDelete.$key);
     teamEntryInFirebase.remove();
   }
-  
+
 }

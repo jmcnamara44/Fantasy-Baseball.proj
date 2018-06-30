@@ -17,16 +17,16 @@ export class LeagueHomeComponent implements OnInit {
   currentRoute: string = this.router.url;
 
   teamToDisplay;
-  teams: FirebaseListObservable<any[]>;
-  constructor(private route: ActivatedRoute, private location: Location, private teamService: TeamService, private router: Router) {
-  }
+  teams;
+  constructor(private route: ActivatedRoute, private location: Location, private teamService: TeamService, private router: Router) {}
   ngOnInit() {
-    this.route.params.forEach((urlParameters) => {
-      this.teamId = urlParameters['id'];
-      this.teams = this.teamService.getTeams();
-
-    });
-    this.teamToDisplay = this.teamService.getTeamById(this.teamId);
+    // this.route.params.forEach((urlParameters) => {
+    //   this.teamId = urlParameters['id'];
+    // });
+    this.teamService.getTeams().subscribe(dataLastEmittedFromObserver => {
+      this.teams = dataLastEmittedFromObserver;
+      console.log(this.teams);
+    })
   }
 
   goToTeamPage(team) {

@@ -8,28 +8,23 @@ import { PlayerService } from '../player.service';
   selector: 'app-draft',
   templateUrl: './draft.component.html',
   styleUrls: ['./draft.component.css'],
-  providers: [PlayerService]
+  providers: [PlayerService, TeamService]
 })
 export class DraftComponent implements OnInit {
-
-  constructor(private playerService: PlayerService) { }
+  teams;
+  constructor(private playerService: PlayerService, private teamService: TeamService) { }
 
   ngOnInit() {
+    this.teamService.getTeams().subscribe(dataLastEmittedFromObserver => {
+      this.teams = dataLastEmittedFromObserver;
+      console.log(this.teams);
+    })
   }
 
   players = this.playerService.playerList
 
-  // each team should have exacty 10 players, with 3 free agents
+  // each team should have exacty 10 players, with 7 free agents
   totalPlayers = [];
-  team1 =[];
-  team2 =[];
-  team3 =[];
-  team4 =[];
-  team5 =[];
-  team6 =[];
-  team7 =[];
-  team8 =[];
-  teams = [this.team1, this.team2, this.team3, this.team4, this.team5, this.team6, this.team7, this.team8];
   freeAgents = [];
   randomPlayerArray() {
     for(var i = 0; i<8; i++) {
