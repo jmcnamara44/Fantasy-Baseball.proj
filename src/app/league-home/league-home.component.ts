@@ -20,9 +20,6 @@ export class LeagueHomeComponent implements OnInit {
   teams;
   constructor(private route: ActivatedRoute, private location: Location, private teamService: TeamService, private router: Router) {}
   ngOnInit() {
-    // this.route.params.forEach((urlParameters) => {
-    //   this.teamId = urlParameters['id'];
-    // });
     this.teamService.getTeams().subscribe(dataLastEmittedFromObserver => {
       this.teams = dataLastEmittedFromObserver;
       console.log(this.teams);

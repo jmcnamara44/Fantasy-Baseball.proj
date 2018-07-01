@@ -13,10 +13,6 @@ export class TeamService {
       if(user) {
         this.userId = user.uid;
         this.teams = database.list(`teams/${this.userId}`);
-        // console.log(this.userId);
-        this.teams.subscribe(team => {
-          //console.log(team);
-        })
       }
     })
   }

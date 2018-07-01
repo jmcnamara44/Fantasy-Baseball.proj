@@ -10,14 +10,20 @@ import { PlayerService } from '../player.service';
   styleUrls: ['./draft.component.css'],
   providers: [PlayerService, TeamService]
 })
+
 export class DraftComponent implements OnInit {
-  teams;
+  teams: Team[] = [];
+  firebaseTeams;
+  team: Team;
   constructor(private playerService: PlayerService, private teamService: TeamService) { }
 
   ngOnInit() {
     this.teamService.getTeams().subscribe(dataLastEmittedFromObserver => {
-      this.teams = dataLastEmittedFromObserver;
-      console.log(this.teams);
+      this.firebaseTeams = dataLastEmittedFromObserver;
+      for(var i = 0; i<this.firebaseTeams.length; i++) {
+        this.team = new Team(this.firebaseTeams[i].teamName, this.firebaseTeams[i].roster);
+        this.teams.push(this.team);
+      }
     })
   }
 
@@ -27,12 +33,13 @@ export class DraftComponent implements OnInit {
   totalPlayers = [];
   freeAgents = [];
   randomPlayerArray() {
+    console.log(this.teams[0]);
     for(var i = 0; i<8; i++) {
       if (this.totalPlayers.length<80) {
         var randomPlayer = this.players[Math.floor(Math.random()*this.players.length)];
         if(this.totalPlayers.indexOf(randomPlayer) == -1) {
           this.totalPlayers.push(randomPlayer);
-          this.teams[i].push(randomPlayer)
+          this.teams[i].roster.push(randomPlayer)
         } else {
           i -=1;
         }
@@ -42,6 +49,7 @@ export class DraftComponent implements OnInit {
             this.freeAgents.push(this.players[x]);
           }
         }
+        console.log(this.teams);
         return this.teams;
       }
       if (i === 7) {
