@@ -21,7 +21,8 @@ export class DraftComponent implements OnInit {
     this.teamService.getTeams().subscribe(dataLastEmittedFromObserver => {
       this.firebaseTeams = dataLastEmittedFromObserver;
       for(var i = 0; i<this.firebaseTeams.length; i++) {
-        this.team = new Team(this.firebaseTeams[i].teamName, this.firebaseTeams[i].roster);
+        console.log(this.firebaseTeams[i].$key)
+        this.team = new Team(this.firebaseTeams[i].teamName, this.firebaseTeams[i].roster, this.firebaseTeams[i].$key);
         this.teams.push(this.team);
       }
     })
@@ -33,7 +34,7 @@ export class DraftComponent implements OnInit {
   totalPlayers = [];
   freeAgents = [];
   randomPlayerArray() {
-    console.log(this.teams[0]);
+    console.log(this.teams[0].id);
     for(var i = 0; i<8; i++) {
       if (this.totalPlayers.length<80) {
         var randomPlayer = this.players[Math.floor(Math.random()*this.players.length)];
